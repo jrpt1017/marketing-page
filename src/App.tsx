@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import ProductDetail from './components/ProductDetail'
+import ProductImage from './components/ProductImage'
 import './App.css';
 
 const App = () => {
@@ -7,11 +9,11 @@ const App = () => {
     <Box
       display="flex"
       sx={{
-        width: '100%'
+        padding: '50px'
       }}
     >
-      <Box>Left</Box>
-      <Box>Right</Box>
+      <ProductDetail />
+      <ProductImage />
     </Box>
   );
 }
