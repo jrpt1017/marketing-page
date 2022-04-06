@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Tabs, Tab, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Box, Typography, Tabs, Tab, FormControl, InputLabel, MenuItem, Select, Button, Divider } from '@mui/material';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -54,8 +54,13 @@ const ProductDetail = () => {
         2017 Best Headphones of the Year Award Winner
       </Typography>
 
+      {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}> */}
       <Box sx={{ borderBottom: 1, borderColor: 'divider', marginTop: 10 }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
           <Tab label="DESCRIPTION" {...a11yProps(0)} />
           <Tab label="DETAILS" {...a11yProps(1)} />
         </Tabs>
@@ -71,7 +76,8 @@ const ProductDetail = () => {
         <Typography
           variant="h4"
           sx={{
-            marginTop: 10,
+            marginTop: 7,
+            marginBottom: 10,
           }}
         >
           $59.99
@@ -90,8 +96,23 @@ const ProductDetail = () => {
             <MenuItem value="brown">Brown</MenuItem>
           </Select>
         </FormControl>
-
+        <Divider
+          sx={{
+            marginTop: 5,
+            marginBottom: 5,
+          }}
+        />
         {/* Add to cart button */}
+        <Button
+          variant="contained"
+          sx={{
+            padding: 2,
+            boxShadow: 'none',
+            width: '50%'
+          }}
+        >
+          <Typography variant="caption">ADD TO CART</Typography>
+        </Button>
       </TabPanel>
       <TabPanel
         value={value}
@@ -107,7 +128,8 @@ const ProductDetail = () => {
           Egestas purus viverra accumsan in.
         </Typography>
       </TabPanel>
-    </Box >
+    </Box>
+    // </Box>
   );
 };
 
