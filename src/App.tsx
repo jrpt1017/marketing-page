@@ -5,15 +5,20 @@ import ProductImage from './components/ProductImage'
 import './App.css';
 
 const App = () => {
+  const [productColor, setProductColor] = React.useState('black');
+
   return (
     <Box
       display="flex"
       sx={{
-        padding: '50px'
+        height: '100vh',
       }}
     >
-      <ProductDetail />
-      <ProductImage />
+      <ProductDetail
+        productColor={productColor}
+        setProductColor={setProductColor}
+      />
+      <ProductImage productColor={productColor} />
     </Box>
   );
 }
