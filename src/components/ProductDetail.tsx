@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Box, Typography, Tabs, Tab, FormControl, InputLabel, MenuItem, Select, Button, Divider } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,10 +53,10 @@ const ProductTitle: React.FC<{}> = () => {
         paddingLeft: 5,
       }}
     >
-      <Typography variant="h3">
+      <Typography variant="h3" color="#4d4d4c" fontWeight="bold">
         Audio-Technica ATH-MSR7
       </Typography>
-      <Typography variant="body1">
+      <Typography variant="body1" fontWeight="600" color="#4d4d4cb3">
         2017 Best Headphones of the Year Award Winner
       </Typography>
     </Box>
@@ -66,12 +67,26 @@ const ProductDetail: React.FC<IProductDetail> = (props: IProductDetail) => {
   const { productColor, setProductColor } = props;
 
   const [value, setValue] = React.useState(0);
+  const [isButtonClicked, setisButtonClicked] = useState(false);
+  const [buttonLabel, setButtonLabel] = useState('ADD TO CART');
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   const handleChangeProductColor = (e: any) => {
     setProductColor(e.target.value);
+  };
+
+  const handleButtonClick = () => {
+    setisButtonClicked(true);
+    setButtonLabel('Loading');
+
+    setTimeout(() => {
+      setisButtonClicked(false);
+      setButtonLabel('VIEW CART');
+      alert('Item added to cart!')
+    }, 2000);
   };
 
   const ProductDescription: React.FC<{}> = () => {
@@ -88,26 +103,43 @@ const ProductDetail: React.FC<IProductDetail> = (props: IProductDetail) => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Typography>
+          <Typography color="#4d4d4c" letterSpacing="0.5px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
             ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
             fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
             mollit anim id est laborum.
           </Typography>
-          <Typography
-            variant="h4"
-            sx={{
-              marginTop: 7,
-              marginBottom: 10,
-            }}
-          >
-            $59.99
+
+          <Box display="flex" gap="50px">
+            <Typography
+              variant="h4"
+              color="#4d4d4c"
+              fontWeight="bold"
+              sx={{
+                marginTop: 7,
+                marginBottom: 10,
+              }}
+            >
+              $59.99
+            </Typography>
+            <Typography
+              variant="h4"
+              color="#4d4d4c7a"
+              fontWeight="bold"
+              sx={{
+                marginTop: 7,
+                marginBottom: 10,
+                textDecoration: 'line-through'
+              }}
+            >
+              $89.99
           </Typography>
+          </Box>
 
           {/* Select a color */}
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <Typography variant="caption">COLORS</Typography>
+            <Typography variant="caption" fontWeight="600">COLORS</Typography>
             <Select
               value={productColor}
               onChange={(e) => { return handleChangeProductColor(e) }}
@@ -123,7 +155,7 @@ const ProductDetail: React.FC<IProductDetail> = (props: IProductDetail) => {
           value={value}
           index={1}
         >
-          <Typography>
+          <Typography color="#4d4d4c" letterSpacing="0.5px">
             Blandit libero volutpat sed cras ornare arcu dui vivamus arcu. Mauris sit amet massa vitae.
             Vel fringilla est ullamcorper eget nulla facilisi etiam. Donec pretium vulputate sapien nec
             sagittis aliquam malesuada. Eget mi proin sed libero. Amet consectetur adipiscing elit duis tristique sollicitudin.
@@ -143,7 +175,7 @@ const ProductDetail: React.FC<IProductDetail> = (props: IProductDetail) => {
       sx={{
         width: '50%',
         borderRight: 1,
-        borderColor: 'divider'
+        borderColor: 'divider',
       }}
     >
       <ProductTitle />
@@ -157,8 +189,10 @@ const ProductDetail: React.FC<IProductDetail> = (props: IProductDetail) => {
           marginLeft: 5,
           marginTop: 10,
         }}
+        onClick={handleButtonClick}
       >
-        <Typography variant="caption">ADD TO CART</Typography>
+        {isButtonClicked && <CircularProgress size={20} style={{ color: 'white' }} />}
+        <Typography variant="caption">{buttonLabel}</Typography>
       </Button>
     </Box>
   );
