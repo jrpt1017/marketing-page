@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Box, Typography, Tabs, Tab, FormControl, InputLabel, MenuItem, Select, Button, Divider } from '@mui/material';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import CircularProgress from '@mui/material/CircularProgress';
 
 interface TabPanelProps {
@@ -49,7 +50,7 @@ const ProductTitle: React.FC<{}> = () => {
   return (
     <Box
       sx={{
-        paddingTop: 15,
+        paddingTop: 8,
         paddingLeft: 5,
       }}
     >
@@ -178,6 +179,15 @@ const ProductDetail: React.FC<IProductDetail> = (props: IProductDetail) => {
         borderColor: 'divider',
       }}
     >
+      <Box display="flex"
+        sx={{
+          paddingTop: 3.75,
+          paddingLeft: 5,
+        }}
+      >
+        <KeyboardBackspaceIcon />
+        <Typography>All products</Typography>
+      </Box>
       <ProductTitle />
       <ProductDescription />
       <Button
